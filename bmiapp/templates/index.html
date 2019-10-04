@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>BMI</title>
+      <style>
+         body { font-family: 'Century Gothic', sans-serif; padding: 10px;}
+         fieldset {
+         border: 0;
+         margin-top: 1em;
+         line-height: 1.75em;
+         }
+         legend {
+         margin-left: -1em;
+         font-weight: bold;
+         }
+         #results {display: none;}
+         input[name=units] { margin-left: 1.5em; }
+         .u:after {
+         content: 'You are Underweight';
+         background-color: yellow;
+         }
+         .n:after {
+         content: 'Normal';
+         background-color: green;
+         color: #fff;
+         }
+         .ow:after {
+         content: 'Overweight';
+         background-color: yellow;
+         }
+         .o:after {
+         content: 'Obese';
+         background-color: orange;
+         }
+         .so:after {
+         content: 'Seriously Obese';
+         background-color: red;
+         }
+         #metric:checked ~ #inputs legend:after { content: 'Metric'; }
+         #metric:checked ~ #inputs label[for=weight]:after { content: '(kg):'; }
+         #metric:checked ~ #inputs label[for=height]:after { content: '(m):'; }
+         #imperial:checked ~ #inputs legend:after { content: 'Imperial'; }
+         #imperial:checked ~ #inputs label[for=weight]:after { content: '(lb):'; }
+         #imperial:checked ~ #inputs label[for=height]:after { content: '(in):'; }
+      </style>
+      <script>
+         function calculate() {
+         
+         var height = document.getElementById('height').value,
+         weight = document.getElementById('weight').value,
+         bt = document.getElementById('body-type');
+             if (document.getElementById('imperial').checked == true) {
+                 height = height * 0.0254;
+                 weight = weight * 0.454;
+             }
+             var bmi = weight / (height * height);
+         if (document.getElementById('male').checked == true) {
+         if (bmi <= 20) {bt.className = 'u';}
+         else if ((bmi > 20) && (bmi <= 25)) {bt.className = 'n';}
+         else if ((bmi > 25) && (bmi <= 30)) {bt.className = 'ow';}
+         else if ((bmi > 30) && (bmi <= 40)) {bt.className = 'o';}
+         else {bt.className = 'so';}
+         }
+         if (document.getElementById('female').checked == true) {
+         if (bmi <= 18.5) {bt.className = 'u';}
+         else if ((bmi > 18.5) && (bmi <= 24)) {bt.className = 'n';}
+         else if ((bmi > 24) && (bmi <= 30)) {bt.className = 'ow';}
+         else if ((bmi > 30) && (bmi <= 40)) {bt.className = 'o';}
+         else {bt.className = 'so';}
+         }
+         
+         if(isNaN(bmi)){
+              document.getElementById('results').style.display = 'none';
+         }
+         else{ 
+         document.getElementById('bmi').innerHTML = bmi.toFixed(1).toString();
+         document.getElementById('results').style.display = 'block';
+             return false;
+         }
+         }
+      </script>
+   </head>
+   <body style="max-width: 600px;margin: 0 auto;width: 100%;">
+      <div>
+         <h1 style="border-bottom: 1px solid #000;
+            padding-bottom: 10px;">Body Mass Index (BMI) Calculator</h1>
+         <form  onsubmit="return false;" style="border:1px solid #000;padding: 15px;">
+            <b>Choose Measuring Units:</b><br><br>
+            <input type="radio" name="units" id="metric" checked> <label for="metric">Metric</label>
+            <input type="radio" name="units" id="imperial"> <label for="imperial">Imperial</label>
+            <fieldset>
+               <legend>Your gender:</legend>
+               <label style="margin-right: 25px;"><input type="radio" name="gender" id="male" required> Male</label>
+               <label><input type="radio" name="gender" id="female" required> Female</label>
+            </fieldset>
+            <fieldset id="inputs">
+               <legend>Calculate BMI: </legend>
+               <label for="weight">Weight </label> <input type="number" name="weight" id="weight" step="any" required>
+               <label for="height">Height </label> <input type="number" name="height" id="height" step="any" required><br>
+               <button style="display: table;margin: 0 auto; max-width: 150px;
+                  width: 100%;background: #4bd17a;border: 1px solid #4bd17a; color: #fff;height: 30px;margin-top: 15px;"  onclick="calculate()">Calculate BMI</button>
+            </fieldset>
+         </form>
+         <div id="results">
+            <h2>Results:</h2>
+            <p>BMI: <span id="bmi"></span></p>
+            <p>You are: <span id="body-type"></span></p>
+         </div>
+      </div>
+   </body>
+</html>
