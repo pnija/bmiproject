@@ -1,20 +1,29 @@
 # Bmi django-project
 
-## Setup
+## Running the Project Locally
 
-### Install Django:
+First, clone the repository to your local machine:
+
 ```bash
-pip install Django
+git clone https://github.com/pnija/bmiproject.git
 ```
 
-### Perform database migration:
+Install the requirements:
+
+```bash
+pip install -r requirement.txt
+```
+
+Create the database:
+
 ```bash
 python manage.py migrate
 ```
 
-## Run Development Server
+Finally, run the development server:
 
 ```bash
 python manage.py runserver
 ```
-Public endpoint is at http://localhost:8000/
+
+The project will be available at **127.0.0.1:8000**.
