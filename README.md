@@ -1,6 +1,6 @@
-# Bmi django-project
+# Bmi Calculator django-project
 
-## Running the Project Locally
+## Getting Started
 
 First, clone the repository to your local machine:
 
