@@ -70,8 +70,8 @@
          else if ((bmi > 30) && (bmi <= 40)) {bt.className = 'o';}
          else {bt.className = 'so';}
          }
-         
-         if(isNaN(bmi)){
+     
+         if(isNaN(bmi) || ((document.getElementById('female').checked == false)&&(document.getElementById('male').checked == false))){
               document.getElementById('results').style.display = 'none';
          }
          else{ 
